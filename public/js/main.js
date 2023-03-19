@@ -20,7 +20,7 @@ searchBtn.addEventListener('keyup',(e)=>{
     let email = search_text
     if(email !== ""){
         let xhr = new XMLHttpRequest()
-        xhr.open('GET',`http://localhost:3000/search/${email}`,true)
+        xhr.open('GET',`https://stucims.onrender.com/search/${email}`,true)
         xhr.send()
         xhr.onload = ()=>{
             if(xhr.status === 200){
@@ -67,7 +67,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 }) 
     let fetchRecords = ()=>{
     let xhr = new XMLHttpRequest()
-    xhr.open('GET','http://localhost:3000/clearance-record',true)
+    xhr.open('GET','https://stucims.onrender.com/clearance-record',true)
     xhr.send()
     xhr.onload = ()=>{
         if(xhr.status === 200){
@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded',()=>{
                         let selectedId = targetElement.parentElement.parentElement.firstElementChild.innerHTML;
                         // console.log(selectedId)
                         const xhr = new XMLHttpRequest();
-                        xhr.open('DELETE',`http://localhost:3000/clearance-record/${selectedId}`,true)
+                        xhr.open('DELETE',`https://stucims.onrender.com/clearance-record/${selectedId}`,true)
                         xhr.setRequestHeader('Content-Type','application/json')
                         xhr.send()
                         xhr.onload = ()=>{
@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded',()=>{
                 if(targetElement.classList.contains('update')){
                     let selectedId = targetElement.parentElement.parentElement.firstElementChild.innerHTML;
                     let xhr = new XMLHttpRequest()
-                    xhr.open('GET',`http://localhost:3000/search/${selectedId}`,true)
+                    xhr.open('GET',`https://stucims.onrender.com/search/${selectedId}`,true)
                     xhr.send()
                     xhr.onload = ()=>{
                         if(xhr.status === 200){
