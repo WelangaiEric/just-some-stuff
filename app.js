@@ -12,7 +12,7 @@ const bodyParser = require('body-parser')
 // express app
 const app = express();
 
-//connect to db
+//connect to db mongodb://myDBReader:D1fficultP%40ssw0rd@mongodb0.example.com:27017/?authSource=admin
 const dbURI = 'mongodb+srv://welangaieric:Barz05122018@cluster0.u4u9dj9.mongodb.net/STUCIMS?retryWrites=true&w=majority'
 mongoose.set('strictQuery',true)
 mongoose.connect(dbURI,{useNewUrlParser:true,useUnifiedTopology:true})
@@ -89,7 +89,7 @@ app.post('/login',urlencodedParser,[
 
             
             if(check){
-                if(req.body.Password==='testuser'&& req.body.username==='admin@gmail.com'){
+                if(check.Password==='testuser'&& check.email==='admin@gmail.com'){
                    return  res.render('admin',{title:'Admin',success:'Login Successful'})
                 }
                 if(check.Password ===req.body.Password){
@@ -104,7 +104,7 @@ app.post('/login',urlencodedParser,[
                             Depart3:userRecord.Depart3
                         })
                     }
-                      else{
+                    else{
                         return res.render('info',{
                             title:'student info',
                             userName:'no records',
@@ -113,6 +113,9 @@ app.post('/login',urlencodedParser,[
                             Depart2:'no records',
                             Depart3:'no records'
                         })
+                    }
+                        
+                        
                    
                  
                     
