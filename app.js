@@ -104,9 +104,15 @@ app.post('/login',urlencodedParser,[
                             Depart3:userRecord.Depart3
                         })
                     }
-                    else{
-                        return  res.render('login',{title:'login',alert:'You dont have any records'})
-                    }
+                      else{
+                        return res.render('info',{
+                            title:'student info',
+                            userName:'no records',
+                            adm:'no records',
+                            Depart1:'no records',
+                            Depart2:'no records',
+                            Depart3:'no records'
+                        })
                    
                  
                     
