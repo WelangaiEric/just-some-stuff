@@ -95,6 +95,7 @@ app.post('/login',urlencodedParser,[
                 if(check.Password ===req.body.Password){
                     let userRecord =await Records.findOne({email:req.body.username})
                         .then(()=>{
+                            console.log(userRecord)
                             if(userRecord){
                                 return res.render('info',{
                                     title:'student info',
