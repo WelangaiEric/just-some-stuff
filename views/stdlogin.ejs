@@ -1,0 +1,39 @@
+<%- include('./partials/header.ejs')%>
+
+<body>
+    <%- include('./partials/nav.ejs')%>
+
+<!-- content -->
+<div class="content">
+    <form class="login"style="height: 60%;" action="/studentlogin" method="post">
+        <div class="form-title">
+            <h1>Log In</h1>
+        </div>
+        <%if(typeof error != 'undefined'){%>
+            <% error.forEach(function(error){%>
+                <div class="alert alert-danger" role="alert">
+                    <%= error%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <%}) %>
+         <%}%>
+         <%if(typeof alert != 'undefined'){%>
+           
+            <div class="alert alert-warning" role="alert">
+                <%= alert%>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+           
+     <%}%>
+        <div class="inputGroup">
+            <input type="text" placeholder="Student Adm eg 1712" name="StdAdm"  class="inputLables">
+            <input type="password" placeholder="Password e.g 12343yhrr$@" name="Password" class="inputLables">
+            <a href="#">Forget password?</a>
+            <a href="/signup">Do not have an account? Sign up here</a>
+
+            <button class="btn btn-success" style="width: 90px;height: 40px;">LogIn</button>
+        </div>
+    </form>
+</div>
+<!-- footer -->
+<%- include('./partials/footer.ejs')%>

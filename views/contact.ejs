@@ -1,0 +1,66 @@
+<%- include('./partials/header.ejs')%>
+
+<body>
+    <%- include('./partials/nav.ejs')%>
+
+<!-- content -->
+<div class="content">
+    <div class="contact-content">
+        <%if(typeof alert != 'undefined'){%>
+           
+            <div class="alert alert-danger" role="alert">
+                <%= alert%>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+           
+     <%}%>
+        <form action="/send_email" class="contact" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="e.g John Doe">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput3" class="form-label">Subject</label>
+                <input type="text" class="form-control" name="Subject" id="exampleFormControlInput3" placeholder="subject">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea4" class="form-label">Message</label>
+                <textarea class="form-control"  name="Message" id="exampleFormControlTextarea4" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+               <button  type="submit"class="btn btn-success">Send Message <i class="bi bi-envelope"></i></button>
+            </div>
+        </form>
+    </div>
+    <hr>
+<div class="contact-links">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"style="border-right: .3px #555 solid;">
+                <p><strong><i class="bi bi-pin"></i> Location:</strong> Eldoret, Kenya</p>
+                <p><strong><i class="bi bi-envelope"></i> Email:</strong> stucims@info.org</p>
+                <p><strong><i class="bi bi-phone"></i> Call:</strong> 0110517055</p>
+            </div>
+            <div class="col-md-4"style="border-right: .3px #555 solid;">
+                <p><strong><i class="bi bi-facebook"></i>Facebook:</strong> STUCIMS Kenya</p>
+                <p><strong><i class="bi bi-twitter"></i>Twitter:</strong> @stucims_ke</p>
+                <p><strong><i class="bi bi-instagram"></i> Instagram:</strong> @stucims_ke</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong><i class="bi bi-whatsapp"></i>Whatapp:</strong>0110517055</p>
+                <p><strong><i class="bi bi-linkedin"></i>LinkedIn:</strong> welangai eric</p>
+                <!-- <p><strong><i class="bi bi-instagram"></i> Instagram:</strong> @stucims_ke</p> -->
+            </div>
+        </div>
+    </div>
+    
+</div>
+</div>
+
+ <!-- footer -->
+ <%- include('./partials/footer.ejs')%>
+ 

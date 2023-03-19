@@ -1,0 +1,137 @@
+<%- include('./partials/header.ejs')%>
+<body>
+<%- include('./partials/nav.ejs')%>
+<!-- employee portal intro section -->
+<div class="contentAdm">
+    <div class="container mt-3">
+        <div class="row" >
+            <div class="col">
+            
+                  <%if(typeof success != 'undefined'){%>
+           
+                    <div class="alert alert-success animate-me" role="alert">
+                        <%= success%>
+                      </div>
+                   
+             <%}%>
+                <h2>Admin Portal</h2>
+                <p class="lead">Welcome to the student clearance app admin dashboard, designed to simplify the process of managing student records. With this app, you can easily add, delete, search, and update student records, all from one centralized location.
+                    The user manual for this app is here to guide you through the process of managing student records effectively. With step-by-step instructions and helpful tips, this manual will ensure that you can use the app efficiently and without any confusion.
+                    Adding new records is simple, and the app allows you to easily input relevant information such as the student's name, identification number, and clearance status. Deleting records is just as easy, with a single click of a button removing any unwanted records. Searching for records is also a breeze, with the ability to filter by various categories such as name, ID number, or clearance status. Lastly, updating records is quick and simple, allowing you to make changes to any record with ease.
+                    With this user manual, you will be able to make the most of the student clearance app admin dashboard, and manage student records effectively and efficiently.
+                    </p>
+                <div class="controls" style="width: 100%;height: 50px;display:flex;justify-content: space-between;">
+                    <button  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-employee-modal" >New Record</button>
+                    <form class="d-flex " id="search-records" style="width: 35%;height: 50px; gap: 5px;">
+                        <input class="form-control me-2" type="search"style="width: 55%;height: 50px;" placeholder="Search email" id="search-input" aria-label="Search" >
+                        
+                        <button class="btn btn-primary" id="show">Show All<i class="bi bi-eye-fill"></i></button>
+                    </form>
+                    <button class="btn btn-success" onclick="generateAdminPdf()">Download <i class="bi bi-download"></i></button>
+
+                    <a href="/logout"><button class="btn btn-warning">Log Out<i class="bi bi-box-arrow-left"></i></button></a>
+                </div>
+        </div>  
+    </div>
+</div>
+<!-- add employee modal  -->
+<!-- Button trigger modal --> 
+<!-- Modal -->
+      <div class="modal" tabindex="-1" id="add-employee-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-success  text-white">
+              <h3 class="modal-title">Add Record</h3>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light" >
+                <form action="/clearance-record" method="POST" id="add-employee-form">
+                    <div class="form-group mt-1">
+                        <input type="text" required id="StudentName" name="studentName" class="form-control" placeholder="Student Name">
+                    </div>
+                    <div class="form-group mt-1">
+                        <input type="string" required class="form-control" name="StdAdm" id="StudentAdm"  placeholder="Student Adm e.g Sc212/1712/2021">
+                    </div>
+                    <div class="form-group mt-1">
+                        <input type="string" required class="form-control" name="email" id="StudentAdm"  placeholder="Email ">
+                    </div>
+                    <div class="form-group mt-1">
+                        <input type="text" required class="form-control" name="Depart1" id="Depart1"  placeholder="Library">
+                    </div>
+                    <div class="form-group mt-1">
+                        <input type="number" required class="form-control" name="Depart2" id="Depart2"  placeholder="Finance">
+                    </div>
+                    <div class="form-group mt-1">
+                        <input type="text" required class="form-control" name="Depart3" id="Depart3"  placeholder="Store">
+                    </div>
+                    <div class="mt-1">
+                        <input type="submit" value="Add Record" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- employee table -->
+        <div class="container mt-3 ">
+            <div class="row">
+                <div class="col">
+                    <table class="table table-hover table-secondary table-striped text-center " id="records-table">
+                        <thead class="">
+                            <tr>
+                                <th class="text-start">STUDENT EMAIL</th>
+                                <th class="text-start">STUDENT ADM</th>
+                                <th class="text-start">STUDENT NAME</th>
+                                <th class="text-start">LIBRARY</th>
+                                <th class="text-start">FINANCE</th>
+                                <th class="text-start">STORE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- ===================================== -->
+                            <!-- this part is added dynamically -->
+                            <!-- ========================================= -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>       
+<!-- Update employee  -->
+        <div class="modal"  id="update-employee-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header bg-secondary  text-white">
+                  <h3 class="modal-title">Update Record</h3>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-light" >
+                    <form  method="post" action="/clearance-record/:email" id="update-records-form">
+                        <div class="form-group mt-1">
+                            <input type="text" required id="updateStudentName" class="form-control" name="studentName" placeholder="Student Name">
+                        </div>
+                        <div class="form-group mt-1">
+                            <input type="text" required class="form-control" id="updateStudentAdm" name="StdAdm"  placeholder="Student Adm">
+                        </div>
+                        <div class="form-group mt-1">
+                            <input type="email" required class="form-control" id="updateEmail" name="email"  placeholder="Email">
+                        </div>
+                        <div class="form-group mt-1">
+                            <input type="text" required class="form-control" id="updateDepart1" name="Depart1"  placeholder="Library">
+                        </div>
+                        <div class="form-group mt-1">
+                            <input type="number" required class="form-control" id="updateDepart2" name="Depart2"  placeholder="Finance">
+                        </div> 
+                        <div class="form-group mt-1">
+                            <input type="text" id="updateDepart3" required class="form-control"name="Depart3" placeholder="Store">
+                        </div>
+                        <div class="mt-1">
+                            <input type="submit" value="Update Record" id="update-btn" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>              
+              </div>
+            </div>
+          </div>
+    </div>    
+<%- include('./partials/footer.ejs')%>

@@ -1,0 +1,50 @@
+<%- include('./partials/header.ejs')%>
+
+<body>
+    <%- include('./partials/nav.ejs')%>
+
+<!-- content -->
+<div class="content" style="position: relative; flex-direction: column;">
+    <div class="alert alert-danger" role="alert"style="position: absolute; top:5px; display:none;">
+        Ensure your paasswor matches
+      </div>
+    <form action="/student-record" method="POST" class="login" style="height: 60%;" id="signup">
+        <div class="form-title">
+            <h1>Sign Up</h1>
+        </div>
+
+        <%if(typeof error != 'undefined'){%>
+            <% error.forEach(function(error){%>
+                <div class="alert alert-danger" role="alert">
+                    <%= error.msg%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <%}) %>
+         <%}%>
+         <%if(typeof alert != 'undefined'){%>
+           
+                <div class="alert alert-warning" role="alert">
+                    <%= alert%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+               
+         <%}%>
+         
+        <div class="inputGroup"style="height: 80%;">
+            <input type="text" required  name="studentName"autocomplete="off"   placeholder="Student Name e.g Welangai Eric"  class="inputLables" required style="height: 40px;">
+            <input type="text" required  name="StdAdm" autocomplete="off" placeholder="Student Adm eg sc121-1712-2021"  class="inputLables" required style="height: 40px;">
+            <input type="email" required  name="email" autocomplete="off" placeholder="Email"  class="inputLables" required style="height: 40px;">
+            <div class="control"style="height: 40px; width:95%; display:flex;gap:5px;justify-content:center;align-items:center;">
+                <input type="password" required id="myInput" autocomplete="off"  name="Password" placeholder="Password e.g 12343yhrr$@" class="inputLables" required style="height: 100%;"><i class="bi bi-eye-fill " onclick="myFunction()" ></i>
+
+            </div>
+                <input type="password" required id="confirm" autocomplete="off"  name="confirmPassword" placeholder="Confirm password" class="inputLables" required style="height: 40px;">
+                <!-- <input type="checkbox" onclick="myFunction()">Show Password -->
+            <a href="#">Forget password?</a>
+            <a href="/login">Already have an account? login here</a>
+
+            <button class="btn btn-success" style="width: 90px;height: 40px;">Sign Up</button>
+        </div>
+    </form>
+</div>
+<%- include('./partials/footer.ejs')%>

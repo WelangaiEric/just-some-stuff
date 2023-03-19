@@ -1,0 +1,49 @@
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport({
+    host: 'smtp.example.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'youremail@example.com',
+        pass: 'yourpassword'
+    }
+});
+
+// setup email data with unicode symbols
+let mailOptions = {
+    from: '"Your Name" <youremail@example.com>', // sender address
+    to: 'recipient@example.com', // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world?', // plain text body
+    html: '<b>Hello world?</b>' // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+});
+In this example, you'll need to replace the SMTP server, email credentials, and email data with your own values.
+
+
+
+
+Welangai Eric
+where can i get free smtp support
+There are several free SMTP services available that you can use to send emails from your Node.js application. Here are a few options:
+
+Sendinblue: Sendinblue is a marketing platform that provides a free SMTP service for up to 300 emails per day. You can use their SMTP server to send transactional emails from your Node.js application.
+
+Gmail SMTP: You can also use Gmail's SMTP server to send emails from your Node.js application. However, you'll need to create a Gmail account and enable "Less secure app access" in your account settings.
+
+Mailgun: Mailgun provides a free SMTP service that allows you to send up to 10,000 emails per month. You'll need to create an account and verify your domain before you can use their SMTP server.
+
+SendGrid: SendGrid offers a free SMTP service that allows you to send up to 100 emails per day. You'll need to create an account and verify your email address before you can use their SMTP server.
+
+Note that some of these services may have limitations or require you to upgrade to a paid plan if you need to send more emails. Make sure to check the terms and conditions of each service before using it.
+
+
+
+
