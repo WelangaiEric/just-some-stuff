@@ -94,23 +94,19 @@ app.post('/login',urlencodedParser,[
                 }
                 if(check.Password ===req.body.Password){
                     let userRecord =await Records.findOne({email:req.body.username})
-                        .then(()=>{
-                            console.log(userRecord)
-                            if(userRecord){
-                                return res.render('info',{
-                                    title:'student info',
-                                    userName:userRecord.studentName,
-                                    adm:userRecord.StdAdm,
-                                    Depart1:userRecord.Depart1,
-                                    Depart2:userRecord.Depart2,
-                                    Depart3:userRecord.Depart3
-                                })
-                            }
+                    if(userRecord){
+                        return res.render('info',{
+                            title:'student info',
+                            userName:userRecord.studentName,
+                            adm:userRecord.StdAdm,
+                            Depart1:userRecord.Depart1,
+                            Depart2:userRecord.Depart2,
+                            Depart3:userRecord.Depart3
                         })
-                        .catch(()=>{
-                            return  res.render('login',{title:'login',alert:'You dont have any records'})
-                            
-                        })
+                    }
+                    else{
+                        return  res.render('login',{title:'login',alert:'You dont have any records'})
+                    }
                    
                  
                     
